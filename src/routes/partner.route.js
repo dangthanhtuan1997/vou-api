@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Voucher = require('../model/voucher.model');
+const Partner = require('../model/partner.model');
 
 module.exports = (app) => {
     app.use('/partners', router);
