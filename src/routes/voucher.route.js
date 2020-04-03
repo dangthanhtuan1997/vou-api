@@ -8,8 +8,8 @@ module.exports = (app) => {
     app.use('/vouchers', router);
 
     router.get('/:id', async (req, res) => {
-        var partners = await Voucher.find({ _id: id });
-        return res.status(200).json(partners);
+        var voucher = await Voucher.find({ _id: req.params.id });
+        return res.status(200).json(voucher);
     });
 
     router.post('/', (req, res) => {
