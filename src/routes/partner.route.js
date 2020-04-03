@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const passport = require('../passport/passport');
-const Partner = require('../model/partner.model');
-const config = require('../config');
+const Voucher = require('../model/voucher.model');
 
 module.exports = (app) => {
     app.use('/partners', router);
@@ -11,6 +8,12 @@ module.exports = (app) => {
     router.get('/', async (req, res) => {
         var partners = await Partner.find({});
         return res.status(200).json(partners);
+    });
+
+    router.get('/:partnerId/vouchers', async (req, res) => {
+        var partnerId = req.params.partnerId;
+        var vouchers = await Voucher.find({partnerId: partnerId});
+        return res.status(200).json(vouchers);
     });
 
     router.post('/', (req, res) => {
