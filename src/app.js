@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-const PORT = 3001;
+const PORT = config.port;
 
 const app = express();
 
