@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-const PORT = config.port || 3000;
+const PORT = config.port || 3001;
 
 const app = express();
 
@@ -55,11 +55,6 @@ app.use(function (err, req, res, next) {
     res.status(500).send('Error on server');
 })
 
-const server = app.listen(PORT, err => {
-    if (err) {
-        console.log(err);
-        process.exit(1);
-        return;
-    }
+app.listen(PORT, err => {
     console.log('App is running at port: ' + PORT);
 });
