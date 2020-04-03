@@ -18,10 +18,10 @@ module.exports = (app) => {
                 return res.status(401).json({ message: 'Voucher has already been taken' })
             }
             var generator = new CodeGenerator();
-            var codes = generator.generateCodes('**********', 10, {});
+            var code = generator.generateCodes('**********', 10, {})[0];
 
-            const qr_code = await QRCode.toDataURL(codes[0]);
-            const voucher = new Voucher({ ...req.body, qr_code });
+            const qr_code = await QRCode.toDataURL(code);
+            const voucher = new Voucher({ ...req.body, qr_code, code });
 
             voucher.save((err, voucher) => {
                 if (err) { return res.status(500).json(err) }
