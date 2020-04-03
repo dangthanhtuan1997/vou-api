@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const CodeGenerator = require('node-code-generator');
+const QRCode = require('qrcode');
 const Voucher = require('../model/voucher.model');
 const Partner = require('../model/partner.model');
 
@@ -11,18 +13,16 @@ module.exports = (app) => {
         return res.status(200).json(partners);
     });
 
-    router.get('/:partnerId/vouchers', async (req, res) => {
+    router.get('/:partnerId/voucher', async (req, res) => {
         var partnerId = req.params.partnerId;
-        var vouchers = await Voucher.find({partnerId: partnerId});
+        var vouchers = await Voucher.find({ partnerId: partnerId });
         return res.status(200).json(vouchers);
     });
 
     router.post('/', (req, res) => {
-        const {username} = req.body;
-        
-        Partner.findOne({ username: username }, (err, p) => {
+        Partner.findOne({ username: req.body.username }, (err, p) => {
             if (p) {
-                return res.status(401).json({ message: 'Username has already been taken' })
+                return res.status(401).json({message: 'Partner has already been taken'})
             }
             const partner = new Partner({ ...req.body });
 

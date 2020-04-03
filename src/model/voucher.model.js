@@ -7,7 +7,9 @@ var VoucherSchema = new mongoose.Schema(
         discount: Number,
         code: String,
         qr_code: String,
-        description: String
+        description: String,
+        startTime: Date,
+        endTime: Date
     },
     {
         timestamps: true
