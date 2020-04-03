@@ -16,7 +16,8 @@ module.exports = (app) => {
     router.get('/:partnerId/voucher', async (req, res) => {
         var partnerId = req.params.partnerId;
         var vouchers = await Voucher.find({ partnerId: partnerId });
-        return res.status(200).json(vouchers);
+        var voucher = vouchers[Math.floor(Math.random() * vouchers.length)];
+        return res.status(200).json(voucher);
     });
 
     router.post('/', (req, res) => {
