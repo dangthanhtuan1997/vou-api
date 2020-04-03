@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const CodeGenerator = require('node-code-generator');
-const QRCode = require('qrcode');
 const Voucher = require('../model/voucher.model');
 const Partner = require('../model/partner.model');
 
