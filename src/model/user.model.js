@@ -12,7 +12,7 @@ var UserSchema = new mongoose.Schema(
         facebookId: String,
         googleId: String,
         voucher: [Schema.Types.ObjectId],
-        image: {
+        avatar: {
             type: String,
             default: '/uploads/default_avatar.png'
         },
