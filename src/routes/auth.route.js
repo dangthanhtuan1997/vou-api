@@ -71,7 +71,7 @@ module.exports = (app) => {
                     "name": userModified.name,
                     "googleId": userModified.googleId,
                     "email": userModified.email,
-                    "userImage": userModified.userImage,
+                    "avatar": userModified.avatar,
                     "token": token
                 });
                 //return res.redirect(`http://localhost:3000?${Object.keys(userInfo).map(key => `${key}=${encodeURIComponent(userInfo[key])}`).join('&')}`)
@@ -82,7 +82,7 @@ module.exports = (app) => {
                 name: userInfo.name,
                 googleId: userInfo.id,
                 email: userInfo.email,
-                userImage: userInfo.picture
+                avatar: userInfo.picture
             });
             newUser.save((err, user) => {
                 if (err) { return res.status(500).json(err) }
@@ -94,7 +94,7 @@ module.exports = (app) => {
                     "name": userModified.name,
                     "googleId": userModified.googleId,
                     "email": userModified.email,
-                    "userImage": userModified.userImage,
+                    "avatar": userModified.avatar,
                     "token": token
                 });
                 return res.redirect('http://localhost:3001?' + query);
