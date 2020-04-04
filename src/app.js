@@ -13,7 +13,7 @@ const PORT = config.port;
 
 const app = express();
 
-app.use('/uploads', express.static('uploads'));
+app.use(config.api.prefix + '/uploads', express.static('uploads'));
 
 app.use(cors());
 

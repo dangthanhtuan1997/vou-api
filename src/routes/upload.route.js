@@ -4,12 +4,13 @@ const User = require('../model/user.model');
 const multer = require('multer');
 const passport = require('../passport/passport');
 var path = require('path');
+fs = require('fs');
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     cb(null, './uploads/');
   },
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     console.log(path.extname(file.originalname));
     cb(null, 'avatar_' + req.body._id + path.extname(file.originalname));
   }
