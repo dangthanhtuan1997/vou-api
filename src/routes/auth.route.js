@@ -118,7 +118,7 @@ module.exports = (app) => {
         return json;
     }
 
-    router.post('/register', (req, res) => {
+    router.post('/signup', (req, res) => {
         if (req.body.password.length < 6) {
             return res
                 .status(400)
@@ -142,7 +142,7 @@ module.exports = (app) => {
         });
     });
 
-    router.post('/login', (req, res) => {
+    router.post('/signin', (req, res) => {
         passport.authenticate('local', { session: false }, (err, user, info) => {
             if (err || !user) {
                 return res.status(401).json({
