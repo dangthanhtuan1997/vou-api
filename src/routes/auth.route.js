@@ -121,13 +121,13 @@ module.exports = (app) => {
     router.post('/register', (req, res) => {
         if (req.body.password.length < 6) {
             return res
-                .status(401)
+                .status(400)
                 .json({ message: 'Passwords must be at least 6 characters' });
         }
         
         User.findOne({ username: req.body.username }, (err, user) => {
             if (user) {
-                return res.status(401).json({ message: 'Username has already been taken' })
+                return res.status(400).json({ message: 'Username has already been taken' })
             }
             bcrypt.hash(req.body.password, config.saltRounds, async function (err, hash) {
                 if (err) { return res.status(500).json(err); }
