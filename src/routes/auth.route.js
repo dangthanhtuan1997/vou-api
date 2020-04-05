@@ -124,9 +124,7 @@ module.exports = (app) => {
                 .status(401)
                 .json({ message: 'Passwords must be at least 6 characters' });
         }
-        if (req.body.password != req.body.confirmPassword) {
-            return res.status(401).json({ message: 'Password and confirm password is not match' });
-        }
+        
         User.findOne({ username: req.body.username }, (err, user) => {
             if (user) {
                 return res.status(401).json({ message: 'Username has already been taken' })
