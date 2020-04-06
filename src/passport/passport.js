@@ -8,7 +8,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 
 var jwtOptions = {};
-jwtOptions.jwtFromRequest = passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken();
+jwtOptions.jwtFromRequest = passportJWT.ExtractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = config.jwtSecret;
 
 passport.use(new LocalStrategy((username, password, done) => {

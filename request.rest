@@ -1,4 +1,14 @@
-POST http://localhost:3000/api/auth/login
+### Đăng nhập
+POST http://localhost:3000/api/auth/signin
+Content-Type: application/json
+
+{
+    "username" : "dangthanhtuan",
+    "password" : "123456"
+}
+
+### Đăng ký
+POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
@@ -6,36 +16,48 @@ Content-Type: application/json
     "password" : "123456"
 }
 
-###
-POST http://localhost:3000/api/auth/register
-Content-Type: application/json
-
-{
-    "username" : "nguyensivan",
-    "name": "Nguyễn Sĩ Văn",
-    "email": "nguyensivan1998@gmail.com",
-    "dateOfBirth": "11/04/1998",
-    "gender": "female",
-    "password" : "123456",
-    "confirmPassword": "123456"
-}
-
-###
+### Lấy profile
 GET http://localhost:3000/api/users/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW1hZ2UiOiIvdXBsb2Fkcy9kZWZhdWx0X2F2YXRhci5wbmciLCJyb2xlIjoidXNlciIsIl9pZCI6IjVlODZhZWQ5NTY0MTVjNDY1NDc0MTZjZSIsInVzZXJuYW1lIjoibmd1eWVuc2l2YW4xIiwibmFtZSI6Ik5ndXnhu4VuIFPEqSBWxINuIiwiZW1haWwiOiJuZ3V5ZW5zaXZhbjE5OThAZ21haWwuY29tIiwiZGF0ZU9mQmlydGgiOiIxMS8wNC8xOTk4Iiwic2V4IjoibnUiLCJjcmVhdGVkQXQiOiIyMDIwLTA0LTAzVDAzOjM0OjQ5Ljk3OVoiLCJ1cGRhdGVkQXQiOiIyMDIwLTA0LTAzVDAzOjM0OjQ5Ljk3OVoiLCJfX3YiOjAsImlhdCI6MTU4NTg4NDg5NiwiZXhwIjoxNTg2NDg5Njk2fQ.hx_DaWRIcsXnDDWF1W00yx58zQdUdV0T4MoM2wzxdPg
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2b3VjaGVyIjpbXSwiYXZhdGFyIjoiL3VwbG9hZHMvZGVmYXVsdF9hdmF0YXIucG5nIiwicm9sZSI6InVzZXIiLCJfaWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJ1c2VybmFtZSI6ImRhbmd0aGFuaHR1YW4iLCJuYW1lIjoixJDhurduZyBUaGFuaCBUdeG6pW4iLCJlbWFpbCI6ImNvbnRhY3QuZGFuZ3RoYW5odHVhbkBnbWFpbC5jb20iLCJkYXRlT2ZCaXJ0aCI6IjEyLzA5LzE5OTciLCJnZW5kZXIiOiJtYWxlIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwidXBkYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwiX192IjowLCJpYXQiOjE1ODYwOTI0NjQsImV4cCI6MTU4NjY5NzI2NH0.MPID1u41v2UOCJYqdE5oEknV23XSwu94UbGYAWApnLM
 
-###
+### Cập nhật profile
 POST http://localhost:3000/api/users/update
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW1hZ2UiOiIvdXBsb2Fkcy9kZWZhdWx0X2F2YXRhci5wbmciLCJyb2xlIjoidXNlciIsIl9pZCI6IjVlODZhZWQ5NTY0MTVjNDY1NDc0MTZjZSIsInVzZXJuYW1lIjoibmd1eWVuc2l2YW4xIiwibmFtZSI6Ik5ndXnhu4VuIFPEqSBWxINuIiwiZW1haWwiOiJuZ3V5ZW5zaXZhbjE5OThAZ21haWwuY29tIiwiZGF0ZU9mQmlydGgiOiIxMS8wNC8xOTk4Iiwic2V4IjoibnUiLCJjcmVhdGVkQXQiOiIyMDIwLTA0LTAzVDAzOjM0OjQ5Ljk3OVoiLCJ1cGRhdGVkQXQiOiIyMDIwLTA0LTAzVDAzOjM0OjQ5Ljk3OVoiLCJfX3YiOjAsImlhdCI6MTU4NTg4NDg5NiwiZXhwIjoxNTg2NDg5Njk2fQ.hx_DaWRIcsXnDDWF1W00yx58zQdUdV0T4MoM2wzxdPg
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2b3VjaGVyIjpbXSwiYXZhdGFyIjoiL3VwbG9hZHMvZGVmYXVsdF9hdmF0YXIucG5nIiwicm9sZSI6InVzZXIiLCJfaWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJ1c2VybmFtZSI6ImRhbmd0aGFuaHR1YW4iLCJuYW1lIjoixJDhurduZyBUaGFuaCBUdeG6pW4iLCJlbWFpbCI6ImNvbnRhY3QuZGFuZ3RoYW5odHVhbkBnbWFpbC5jb20iLCJkYXRlT2ZCaXJ0aCI6IjEyLzA5LzE5OTciLCJnZW5kZXIiOiJtYWxlIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwidXBkYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwiX192IjowLCJpYXQiOjE1ODYwOTI0NjQsImV4cCI6MTU4NjY5NzI2NH0.MPID1u41v2UOCJYqdE5oEknV23XSwu94UbGYAWApnLM
 
 {
-    "_id" : "5e86aed956415c46547416ce",
-    "username" : "nguyensivan",
-    "name": "Nguyễn Sĩ Văn",
-    "email": "nguyensivan1998@gmail.com",
-    "dateOfBirth": "11/04/1997",
-    "sex": "nu",
-    "newPassword" : "123456",
-    "confirmNewPassword": "123456"
+    "_id" : "5e885d3e5e998c3448ee8e2e",
+    "username" : "dangthanhtuan",
+    "name": "Đặng Thanh Tuấn",
+    "email": "contact.dangthanhtuan@gmail.com",
+    "dateOfBirth": "12/09/1997",
+    "sex": "male",
+    "newPassword" : "123456"
 }
+
+### Tạo voucher
+POST http://localhost:3000/api/vouchers
+Content-Type: application/json
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2b3VjaGVyIjpbXSwiYXZhdGFyIjoiL3VwbG9hZHMvZGVmYXVsdF9hdmF0YXIucG5nIiwicm9sZSI6InVzZXIiLCJfaWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJ1c2VybmFtZSI6ImRhbmd0aGFuaHR1YW4iLCJuYW1lIjoixJDhurduZyBUaGFuaCBUdeG6pW4iLCJlbWFpbCI6ImNvbnRhY3QuZGFuZ3RoYW5odHVhbkBnbWFpbC5jb20iLCJkYXRlT2ZCaXJ0aCI6IjEyLzA5LzE5OTciLCJnZW5kZXIiOiJtYWxlIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwidXBkYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwiX192IjowLCJpYXQiOjE1ODYwOTI0NjQsImV4cCI6MTU4NjY5NzI2NH0.MPID1u41v2UOCJYqdE5oEknV23XSwu94UbGYAWApnLM
+
+{
+    "partnerId" : "5e88484f1c9d440000fc404f",
+    "discount" : "10",
+    "type" : "personal",
+    "description" : "Giảm 10% tổng hóa đơn",
+    "startTime" : "2020/01/01",
+    "endTime" : "2020/01/01"
+}
+
+### Thêm người nhận vào thông tin voucher
+POST http://localhost:3000/api/partners/5e86e6a3e1ad0f44f494e825/voucher
+Content-Type: application/json
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2b3VjaGVyIjpbXSwiYXZhdGFyIjoiL3VwbG9hZHMvZGVmYXVsdF9hdmF0YXIucG5nIiwicm9sZSI6InVzZXIiLCJfaWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJ1c2VybmFtZSI6ImRhbmd0aGFuaHR1YW4iLCJuYW1lIjoixJDhurduZyBUaGFuaCBUdeG6pW4iLCJlbWFpbCI6ImNvbnRhY3QuZGFuZ3RoYW5odHVhbkBnbWFpbC5jb20iLCJkYXRlT2ZCaXJ0aCI6IjEyLzA5LzE5OTciLCJnZW5kZXIiOiJtYWxlIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwidXBkYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwiX192IjowLCJpYXQiOjE1ODYwOTI0NjQsImV4cCI6MTU4NjY5NzI2NH0.MPID1u41v2UOCJYqdE5oEknV23XSwu94UbGYAWApnLM
+
+{
+    "userId" : "5e885d3e5e998c3448ee8e2e"
+}
+
+### Lấy thông tin voucher
+GET http://localhost:3000/api/vouchers/5e8ac5c5fdd64c2f2cc918b6
+Authorization: jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2b3VjaGVyIjpbXSwiYXZhdGFyIjoiL3VwbG9hZHMvZGVmYXVsdF9hdmF0YXIucG5nIiwicm9sZSI6InVzZXIiLCJfaWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJ1c2VybmFtZSI6ImRhbmd0aGFuaHR1YW4iLCJuYW1lIjoixJDhurduZyBUaGFuaCBUdeG6pW4iLCJlbWFpbCI6ImNvbnRhY3QuZGFuZ3RoYW5odHVhbkBnbWFpbC5jb20iLCJkYXRlT2ZCaXJ0aCI6IjEyLzA5LzE5OTciLCJnZW5kZXIiOiJtYWxlIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwidXBkYXRlZEF0IjoiMjAyMC0wNC0wNFQxMDoxMToxMC41NTlaIiwiX192IjowLCJpYXQiOjE1ODYwOTI0NjQsImV4cCI6MTU4NjY5NzI2NH0.MPID1u41v2UOCJYqdE5oEknV23XSwu94UbGYAWApnLM

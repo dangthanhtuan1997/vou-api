@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('../passport/passport');
 const CodeGenerator = require('node-code-generator');
 const QRCode = require('qrcode');
 const Voucher = require('../model/voucher.model');
@@ -7,12 +8,12 @@ const Voucher = require('../model/voucher.model');
 module.exports = (app) => {
     app.use('/vouchers', router);
 
-    router.get('/:id', async (req, res) => {
+    router.get('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
         var voucher = await Voucher.find({ _id: req.params.id });
         return res.status(200).json(voucher);
     });
 
-    router.post('/', async (req, res) => {
+    router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
         var generator = new CodeGenerator();
         var code = req.body.code || generator.generateCodes('**********', 10, {})[0];
 
@@ -20,7 +21,7 @@ module.exports = (app) => {
 
         Voucher.findOne({ code: code }, (err, v) => {
             if (v) {
-                return res.status(401).json({ message: 'Voucher has already been taken' })
+                return res.status(400).json({ message: 'Voucher has already been taken' })
             }
 
             const voucher = new Voucher({ ...req.body, qr_code, code });

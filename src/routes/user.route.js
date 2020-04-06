@@ -16,9 +16,6 @@ module.exports = (app) => {
         if (req.body.newPassword.length < 6) {
             return res.status(401).json({ message: 'Passwords must be at least 6 characters' });
         }
-        if (req.body.newPassword != req.body.confirmNewPassword) {
-            return res.status(401).json({ message: 'New password and confirm password is not match' });
-        }
         bcrypt.hash(req.body.newPassword, config.saltRounds, (err, hash) => {
             var UpdateUser = {
                 $set: {
