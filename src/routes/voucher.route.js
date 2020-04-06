@@ -9,7 +9,7 @@ module.exports = (app) => {
     app.use('/vouchers', router);
 
     router.get('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
-        var voucher = await Voucher.find({ _id: req.params.id });
+        var voucher = await Voucher.findById(req.params.id);
         return res.status(200).json(voucher);
     });
 
