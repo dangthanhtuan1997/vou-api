@@ -4,13 +4,15 @@ const passport = require('../passport/passport');
 const CodeGenerator = require('node-code-generator');
 const QRCode = require('qrcode');
 const Voucher = require('../model/voucher.model');
+const Partner = require('../model/partner.model');
 
 module.exports = (app) => {
     app.use('/vouchers', router);
 
     router.get('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
         var voucher = await Voucher.findById(req.params.id);
-        return res.status(200).json(voucher);
+        var partner = await Partner.findById(voucher.partnerId);
+        return res.status(200).json({voucher, partner});
     });
 
     router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
