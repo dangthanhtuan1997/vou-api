@@ -15,9 +15,9 @@ module.exports = (app) => {
             name: fullName,
             phone: phone
         });
-        console.log(response);
-        // const chatbot = new ChatBot({ name: fullName, phone: phone, data: JSON.stringify(response) });
-        // await chatbot.save();
+        console.log(response.data);
+        const chatbot = new ChatBot({ name: fullName, phone: phone, data: JSON.stringify(response.data) });
+        await chatbot.save();
         return res.status(200).end();
     });
 };
