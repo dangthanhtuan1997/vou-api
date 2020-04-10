@@ -11,7 +11,7 @@ module.exports = (app) => {
     router.post('/', async (req, res) => {
         const { fullName, phone } = req.body;
         
-        const response = await axios.post('https://service-api.accesstrade.vn/api/v1/lead/store?campaign_id=61&ad_space_code=ADS000010668&token=ba441b0c86bb92c9ed98bd298c8c2827', {
+        const response = await axios.post('https://service-api.accesstrade.vn/api/v1/lead/store?campaign_id=32&ad_space_code=ADS000010668&token=ba441b0c86bb92c9ed98bd298c8c2827', {
             name: fullName,
             phone: phone
         });
