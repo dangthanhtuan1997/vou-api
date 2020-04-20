@@ -6,7 +6,6 @@ const auth = require('./auth.route');
 const upload = require('./upload.route');
 const partner = require('./partner.route');
 const voucher = require('./voucher.route');
-const chatbot = require('./chatbot.route');
 
 module.exports = () => {
     user(router);
@@ -14,7 +13,6 @@ module.exports = () => {
     upload(router);
     partner(router);
     voucher(router);
-    chatbot(router);
     
     return router;
 }

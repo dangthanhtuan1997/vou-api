@@ -3,13 +3,7 @@ const bcrypt = require('bcrypt');
 const config = require('../config');
 const User = require('../model/user.model');
 
-const passportJWT = require('passport-jwt');
-const JwtStrategy = require('passport-jwt').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-
-var jwtOptions = {};
-jwtOptions.jwtFromRequest = passportJWT.ExtractJwt.fromAuthHeaderWithScheme('jwt');
-jwtOptions.secretOrKey = config.jwtSecret;
 
 passport.use(new LocalStrategy((username, password, done) => {
 	User.findOne({ username: username }, (err, user) => {
@@ -24,18 +18,6 @@ passport.use(new LocalStrategy((username, password, done) => {
 			}
 			return done(null, false, { message: 'Incorrect username or password' });
 		});
-	});
-}));
-
-passport.use(new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-	User.findById(jwt_payload._id, (err, user) => {
-		if (err) { return next(err); }
-		if (!user) {
-			return next(null, false);
-		}
-		const userModified = user.toObject();
-		delete userModified.password;
-		next(null, userModified);
 	});
 }));
 

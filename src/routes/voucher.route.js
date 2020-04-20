@@ -5,17 +5,18 @@ const CodeGenerator = require('node-code-generator');
 const QRCode = require('qrcode');
 const Voucher = require('../model/voucher.model');
 const Partner = require('../model/partner.model');
+const verify = require('../middlewares/auth.middleware');
 
 module.exports = (app) => {
     app.use('/vouchers', router);
 
-    router.get('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    router.get('/:id', verify, async (req, res) => {
         var voucher = await Voucher.findById(req.params.id);
         var partner = await Partner.findById(voucher.partnerId);
         return res.status(200).json({voucher, partner});
     });
 
-    router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    router.post('/', verify, async (req, res) => {
         var generator = new CodeGenerator();
         var code = req.body.code || generator.generateCodes('**********', 10, {})[0];
 

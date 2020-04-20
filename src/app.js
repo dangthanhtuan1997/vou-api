@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 
 app.use(function (err, req, res, next) {
     console.log(err.stack);
-    res.status(500).send('Error on server');
+    res.status(err.statusCode).json({message: err.message});
 })
 
 app.listen(PORT, err => {

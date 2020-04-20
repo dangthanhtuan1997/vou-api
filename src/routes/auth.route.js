@@ -124,7 +124,7 @@ module.exports = (app) => {
                 .status(400)
                 .json({ message: 'Passwords must be at least 6 characters' });
         }
-        
+
         User.findOne({ username: req.body.username }, (err, user) => {
             if (user) {
                 return res.status(400).json({ message: 'Username has already been taken' })
@@ -154,10 +154,8 @@ module.exports = (app) => {
                 if (err) {
                     return res.send(err);
                 }
-                const userModified = user.toObject();
-                delete userModified.password;
-                const token = jwt.sign(userModified, config.jwtSecret, { expiresIn: '7d' });
-                return res.json({ userModified, token });
+                const token = jwt.sign({ userId: user._id }, config.jwtSecret, { expiresIn: '7d' });
+                return res.json({ token });
             });
         })(req, res);
     });

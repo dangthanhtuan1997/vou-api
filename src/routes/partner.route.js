@@ -4,16 +4,17 @@ const passport = require('../passport/passport');
 const Voucher = require('../model/voucher.model');
 const Partner = require('../model/partner.model');
 const User = require('../model/user.model');
+const verify = require('../middlewares/auth.middleware');
 
 module.exports = (app) => {
     app.use('/partners', router);
 
-    router.get('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    router.get('/', verify, async (req, res) => {
         var partners = await Partner.find({});
         return res.status(200).json(partners);
     });
 
-    router.post('/:partnerId/voucher', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    router.post('/:partnerId/voucher', verify, async (req, res) => {
         const { partnerId } = req.params;
         const { userId } = req.body;
 
@@ -32,7 +33,7 @@ module.exports = (app) => {
         }
     });
 
-    router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+    router.post('/', verify, (req, res) => {
         Partner.findOne({ username: req.body.username }, (err, p) => {
             if (p) {
                 return res.status(401).json({ message: 'Partner has already been taken' })

@@ -5,6 +5,8 @@ const multer = require('multer');
 const passport = require('../passport/passport');
 var path = require('path');
 fs = require('fs');
+const verify = require('../middlewares/auth.middleware');
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -33,25 +35,21 @@ const upload = multer({
 module.exports = app => {
   app.use('/uploads', router);
 
-  router.post(
-    '/image',
-    passport.authenticate('jwt', { session: false }),
-    upload.single('userImage'),
-    (req, res) => {
-      var UpdateUser = {
-        $set: {
-          userImage:
-            '/uploads/avatar_' + req.body._id + path.extname(req.file.originalname)
-        }
-      };
-      User.findByIdAndUpdate({ _id: req.body._id }, UpdateUser, (err, user) => {
-        if (err) {
-          return res
-            .status(500)
-            .json({ message: 'Upload failed, please try again' });
-        }
-        res.status(200).json({ message: 'Upload image success' });
-      });
-    }
+  router.post('/image', verify, upload.single('userImage'), (req, res) => {
+    var UpdateUser = {
+      $set: {
+        userImage:
+          '/uploads/avatar_' + req.body._id + path.extname(req.file.originalname)
+      }
+    };
+    User.findByIdAndUpdate({ _id: req.body._id }, UpdateUser, (err, user) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ message: 'Upload failed, please try again' });
+      }
+      res.status(200).json({ message: 'Upload image success' });
+    });
+  }
   );
 };
