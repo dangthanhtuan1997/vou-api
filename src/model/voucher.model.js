@@ -3,18 +3,17 @@ const Schema = mongoose.Schema;
 
 var VoucherSchema = new mongoose.Schema(
     {
-        partnerId: Schema.Types.ObjectId,
+        partner_id: Schema.Types.ObjectId,
         discount: Number,
         code: String,
         qr_code: String,
-        type: String,
-        userId: { type: Schema.Types.ObjectId, default: null },
+        user_id: { type: Schema.Types.ObjectId, default: null },
         used: { type: Boolean, default: false },
-        owned: { type: Boolean, default: false },
+        available: { type: Boolean, default: true },
         description: String,
-        maximumValue: { type: Number, default: null },
-        startTime: Date,
-        endTime: Date
+        maximum_value: { type: Number, default: null },
+        start_time: Date,
+        end_time: Date
     },
     {
         timestamps: true

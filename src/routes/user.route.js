@@ -15,29 +15,23 @@ module.exports = (app) => {
     });
 
     router.patch('/me', verify, (req, res) => {
-        if (req.body.newPassword.length < 6) {
-            return res.status(401).json({ message: 'Passwords must be at least 6 characters' });
-        }
-
-        bcrypt.hash(req.body.newPassword, config.saltRounds, (err, hash) => {
-            let UpdateUser = {
-                $set: {
-                    name: req.body.name,
-                    email: req.body.email,
-                    dateOfBirth: req.body.dateOfBirth,
-                    gender: req.body.gender,
-                    password: hash
-                }
-            };
-            User.findByIdAndUpdate(req.tokenPayload.userId, UpdateUser, (err, user) => {
-                if (err) {
-                    return res.status(500).json(err);
-                }
-                if (!user) {
-                    return res.status(404).json({ message: 'Not found user: ' + req.tokenPayload.userId });
-                }
-                res.status(200).json({ message: 'Update successful' });
-            });
+        let UpdateUser = {
+            $set: {
+                display_name: req.body.display_name,
+                email: req.body.email,
+                date_of_birth: req.body.date_of_birth,
+                gender: req.body.gender
+            }
+        };
+        
+        User.findByIdAndUpdate(req.tokenPayload.userId, UpdateUser, (err, user) => {
+            if (err) {
+                return res.status(500).json(err);
+            }
+            if (!user) {
+                return res.status(404).json({ message: 'Not found user: ' + req.tokenPayload.userId });
+            }
+            res.status(200).json({ message: 'Update successful' });
         });
     });
 };

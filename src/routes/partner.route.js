@@ -14,19 +14,19 @@ module.exports = (app) => {
         return res.status(200).json(partners);
     });
 
-    router.post('/:partnerId/voucher', verify, async (req, res) => {
-        const { partnerId } = req.params;
-        const { userId } = req.body;
+    router.post('/:partner_id/voucher', verify, async (req, res) => {
+        const { partner_id } = req.params;
+        const { user_id } = req.body;
 
         try {
-            const vouchers = await Voucher.find({ partnerId: partnerId, owned: false });
+            const vouchers = await Voucher.find({ partner_id: partner_id, available: true });
             const voucherRandom = vouchers[Math.floor(Math.random() * vouchers.length)];
             if (!voucherRandom) {
                 return res.status(204).end();
             }
-            const voucher = { ...voucherRandom.toObject(), userId: userId, owned: true };
+            const voucher = { ...voucherRandom.toObject(), user_id: user_id, owned: true };
             await Voucher.findByIdAndUpdate(voucher._id, voucher);
-            await User.findByIdAndUpdate(userId, {$push: {voucher: voucher._id}})
+            await User.findByIdAndUpdate(user_id, {$push: {vouchers: voucher._id}})
             return res.status(200).json(voucher);
         } catch (error) {
             console.log(error);

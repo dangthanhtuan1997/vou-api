@@ -12,27 +12,32 @@ module.exports = (app) => {
 
     router.get('/:id', verify, async (req, res) => {
         var voucher = await Voucher.findById(req.params.id);
-        var partner = await Partner.findById(voucher.partnerId);
-        return res.status(200).json({voucher, partner});
+        var partner = await Partner.findById(voucher.partner_id);
+        return res.status(200).json({ voucher, partner });
     });
 
     router.post('/', verify, async (req, res) => {
-        var generator = new CodeGenerator();
-        var code = req.body.code || generator.generateCodes('**********', 10, {})[0];
+        for (let i = 0; i < req.body.count; i++) {
+            const generator = new CodeGenerator();
+            const code = req.body.promo_code + generator.generateCodes('**********', 10, {})[0];
 
-        var qr_code = await QRCode.toDataURL(code);
+            const qr_code = await QRCode.toDataURL(code);
 
-        Voucher.findOne({ code: code }, (err, v) => {
-            if (v) {
-                return res.status(400).json({ message: 'Voucher has already been taken' })
-            }
+            await Voucher.findOne({ code: code }, (err, v) => {
+                if (v) {
+                    i--;
+                }
+                else {
+                    const voucher = new Voucher({ ...req.body, qr_code, code });
 
-            const voucher = new Voucher({ ...req.body, qr_code, code });
-
-            voucher.save((err, voucher) => {
-                if (err) { return res.status(500).json(err) }
-                return res.status(201).json(voucher);
+                    voucher.save((err, voucher) => {
+                        if (err) { 
+                            i--;
+                        }
+                    });
+                }
             });
-        });
+        }
+        return res.status(201).json({message: "Create successful"});
     });
 };

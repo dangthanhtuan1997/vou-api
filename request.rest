@@ -12,7 +12,7 @@ POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-    "username" : "nguyensivan",
+    "username" : "dangthanhtuan",
     "password" : "123456"
 }
 
@@ -23,14 +23,13 @@ token: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTg4NWQzZTVlOTk4
 ### Cập nhật profile
 PATCH  http://localhost:3000/api/users/me
 Content-Type: application/json
-token: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJpYXQiOjE1ODczNzQwMzUsImV4cCI6MTU4Nzk3ODgzNX0.ekm8hSBokhxa_SqkRxhV9KUaOMU5jNPnESNZl5-e9q4
+token: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTlkOTMyODY2Y2YwODFmYWMwM2Q1ZWUiLCJpYXQiOjE1ODczODUxNTksImV4cCI6MTU4Nzk4OTk1OX0.CM2StejAGUgTXzjHoaF7bSVvovONjM4VsJv_6Z8w1pg
 
 {
-    "name": "Đặng Thanh Tuấn",
+    "display_name": "Đặng Thanh Tuấn",
     "email": "contact.dangthanhtuan@gmail.com",
-    "dateOfBirth": "12/09/1997",
-    "sex": "male",
-    "newPassword" : "123456"
+    "date_of_birth": "12/09/1997",
+    "gender": "male"
 }
 
 ### Tạo voucher
@@ -39,12 +38,13 @@ Content-Type: application/json
 token: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJpYXQiOjE1ODczNzQwMzUsImV4cCI6MTU4Nzk3ODgzNX0.ekm8hSBokhxa_SqkRxhV9KUaOMU5jNPnESNZl5-e9q4
 
 {
-    "partnerId" : "5e8849d61c9d440000fc4050",
+    "partner_id" : "5e86e6a3e1ad0f44f494e825",
     "discount" : "10",
-    "type" : "personal",
     "description" : "Giảm 20% tổng hóa đơn",
-    "startTime" : "2020/01/01",
-    "endTime" : "2020/06/01"
+    "start_time" : "2020/01/01",
+    "end_time" : "2020/12/31",
+    "promo_code": "TOCO",
+    "count": "10"
 }
 
 ### Thêm người nhận vào thông tin voucher
@@ -53,9 +53,9 @@ Content-Type: application/json
 token: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJpYXQiOjE1ODczNzQwMzUsImV4cCI6MTU4Nzk3ODgzNX0.ekm8hSBokhxa_SqkRxhV9KUaOMU5jNPnESNZl5-e9q4
 
 {
-    "userId" : "5e885d3e5e998c3448ee8e2e"
+    "user_id" : "5e9d932866cf081fac03d5ee"
 }
 
 ### Lấy thông tin voucher
-GET http://localhost:3000/api/vouchers/5e8ac5c5fdd64c2f2cc918b6
+GET http://localhost:3000/api/vouchers/5e9d9ead4a6a632490cf2cdb
 token: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTg4NWQzZTVlOTk4YzM0NDhlZThlMmUiLCJpYXQiOjE1ODczNzQwMzUsImV4cCI6MTU4Nzk3ODgzNX0.ekm8hSBokhxa_SqkRxhV9KUaOMU5jNPnESNZl5-e9q4

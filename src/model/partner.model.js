@@ -5,12 +5,12 @@ var PartnerSchema = new mongoose.Schema(
     {
         username: String,
         password: String,
-        displayName: String,
+        display_name: String,
         address: String,
         email: String,
-        voucher: [Schema.Types.ObjectId],
-        game: [Schema.Types.ObjectId],
-        image: {
+        vouchers: [Schema.Types.ObjectId],
+        games: [Schema.Types.ObjectId],
+        avatar: {
             type: String,
             default: '/uploads/default_avatar.png'
         },
