@@ -24,7 +24,7 @@ module.exports = (app) => {
             if (!voucherRandom) {
                 return res.status(204).end();
             }
-            const voucher = { ...voucherRandom.toObject(), user_id: user_id, owned: true };
+            const voucher = { ...voucherRandom.toObject(), user_id: user_id, available: false };
             await Voucher.findByIdAndUpdate(voucher._id, voucher);
             await User.findByIdAndUpdate(user_id, {$push: {vouchers: voucher._id}})
             return res.status(200).json(voucher);
